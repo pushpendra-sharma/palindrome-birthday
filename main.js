@@ -43,7 +43,7 @@ const convertDateToString = (dateObj) => {
 };
 
 const getDateInAllFormats = (dateObj) => {
-  let strDate = convertDateToString(dateObj); //1
+  let strDate = convertDateToString(dateObj);
   const dateInAllFormats = {
     'DD-MM-YYYY': strDate.day + strDate.month + strDate.year,
     'MM-DD-YYYY': strDate.month + strDate.day + strDate.year,
@@ -57,16 +57,13 @@ const getDateInAllFormats = (dateObj) => {
 };
 
 const checkPalindromeForAllDateFormats = (dateObj) => {
-  let dateFormatList = getDateInAllFormats(dateObj); //1
-  // let isPalindromeList = [];
+  let dateFormatList = getDateInAllFormats(dateObj);
   let isDatePalindorme = false;
   for (let formattedDate of dateFormatList) {
     if (isPalindrome(formattedDate)) {
-      //1 to max 6
       isDatePalindorme = true;
       break;
     }
-    //isPalindromeList.push(flag);
   }
   return isDatePalindorme;
 };
@@ -86,7 +83,6 @@ const getNextdate = (dateObj) => {
   let month = dateObj.month;
   let year = dateObj.year;
 
-  //modify
   if (month === 2) {
     if (isLeapYear(year)) {
       if (day > 29) {
@@ -181,10 +177,8 @@ const getPreviousPalindromeDate = (dateObj) => {
 };
 
 const getNearestPalindromeDate = (d) => {
-  if (getNextPalindromeDate(d)[0] < getPreviousPalindromeDate(d)[0])
-    return getNextPalindromeDate(d);
+  if (getNextPalindromeDate(d)[0] < getPreviousPalindromeDate(d)[0]) return getNextPalindromeDate(d);
   else return getPreviousPalindromeDate(d);
-  //1 function executing 2 times
 };
 
 const dobInput = document.querySelector('#dob');
@@ -204,20 +198,20 @@ function clickHandler() {
       year: Number(date[0]),
     };
 
-    if (checkPalindromeForAllDateFormats(newDate))
-      output.innerText = "yes it's palindrome";
-    else {
+    if (checkPalindromeForAllDateFormats(newDate)) {
+      output.innerText = 'Yay! Your birthday is palindrome!';
+    } else {
       let [days, nearestDate] = getNearestPalindromeDate(newDate);
       output.innerText =
-        'miss by ' +
-        days +
-        ' days ' +
-        'nearest date is ' +
-        nearestDate.day +
+        'The nearest palindrome date is ' +
+        +nearestDate.day +
         '-' +
         nearestDate.month +
         '-' +
-        nearestDate.year;
+        nearestDate.year +
+        ', you missed by ' +
+        days +
+        ' days.';
     }
   } else {
     msg.innerText = 'enter date';
